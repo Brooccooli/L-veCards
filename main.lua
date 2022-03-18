@@ -5,6 +5,10 @@ dofile("LoadCards.lua")
 dofile("PrintEffects.lua")
 dofile("DrawCards.lua")
 dofile("UI.lua")
+dofile("LoadParticles.lua")
+dofile("Help/UpdateHandler.lua")
+dofile("Help/DrawHandler.lua")
+dofile("Help/CoopHandler.lua")
 dofile("Help/Debug.lua")
 
 
@@ -17,21 +21,12 @@ CARD_PIXEL_Y = 900 * MAX_SIZE
 SCREEN_WIDTH = 1200
 SCREEN_HEIGHT = 700
 
+
 function love.load()
 
     LoadCards()
 
-    -- Particle test
-    star = love.graphics.newImage("Assets/star.png")
-    pSystem = love.graphics.newParticleSystem(star, 32)
-    pSystem:setParticleLifetime(1,5)
-    --this will make your particals shoot out in diffrent directions
-    --this will make your particles look much better
-    --you can play with the numbers to make them move in diffrent directions
-    pSystem:setLinearAcceleration(-20, -1, 20, 100)
-    pSystem:setSizes(1, 0.1)
-    pSystem:setSpeed(-100, 100)
-    pSystem:setRotation(10, 20)
+    LoadParticles()
 
     -- Window size
     love.window.setMode(SCREEN_WIDTH, SCREEN_HEIGHT)
@@ -40,7 +35,7 @@ function love.load()
     mouseX = 0
     mouseY = 0
 
-    cardX = 10
+    cardX = 10 
     cardY = 10
 
     sizeX = MAX_SIZE
@@ -56,28 +51,14 @@ function love.update(dt)
 
     pSystem:update(dt)
 
-    for i = slots, 1, -1 do
-        cardSlots[i][WIDTH] = turnCard(cardSlots[i][WIDTH], i)
-
-        -- if hovered
-        cardSlots[i][HOVER] = MInside(cardSlots[i][X], cardSlots[i][Y])
-    end
+    CoopUpdate(dt)
 end
 
 function love.draw()
     -- Fill screen
     love.graphics.setBackgroundColor(0.5, 0, 1)
 
-    DrawCards()
-
-    -- Card Deck
-    for i = 10, 1, -1 do
-        if MInside(deck[X], deck[Y]) then
-            love.graphics.draw(cardBack, deck[X] - i, deck[Y] - i, MAX_SIZE - 0.1, MAX_SIZE, MAX_SIZE)
-        else
-            love.graphics.draw(cardBack, deck[X] - i, deck[Y] - i, MAX_SIZE, MAX_SIZE, MAX_SIZE)
-        end
-    end
+    CoopDraw()
 
     -- Particle system
     pSystem:setPosition(love.mouse.getX(), love.mouse.getY())
