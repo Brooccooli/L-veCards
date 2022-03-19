@@ -16,7 +16,7 @@ function LoadCards()
     STAT = "stat"
     FACE_UP = "fUp"
 
-    -- Types
+    -- Card Types
     DIMENSION = "dimension"
     MUTANT = "mutant"
     MONKE = "monke"
@@ -67,11 +67,13 @@ function LoadCards()
 
     -- Set cards in slots
     for i = slots, 1, -1 do
-        local index = love.math.random(2, 16)
+        local index = love.math.random(2, CARD_AMOUNT)
         cardSlots[i][INDEX] = index
         cardSlots[i][DESC] = cards[index][DESC]
         cardSlots[i][TYPE] = cards[index][TYPE]
     end
+
+    SummonGod()
 
     -- TODO: 4 of the same card summons God card and play new effect
 end
@@ -81,12 +83,13 @@ function reRoll()
         -- Random 34
         --math.floor(rand()*10) + 1
 
-        local index = love.math.random(1, 16)
+        local index = love.math.random(2, CARD_AMOUNT)
         cardSlots[i][INDEX] = index
         --cardSlots[i][PNG] = cardBack
         cardSlots[i][DESC] = cards[index][DESC]
         cardSlots[i][TYPE] = cards[index][TYPE]
     end
+    SummonGod()
 end
 
 -- ###################
@@ -170,4 +173,24 @@ function SetDescriptions()
     cards[14][STAT] = 3
     cards[15][STAT] = 3
     cards[16][STAT] = 3
+end
+
+function SummonGod()
+    matches = 0
+    local lastCard = 0
+    for i = slots, 1, -1 do
+        if i == slots then
+            lastCard = cardSlots[i][INDEX]
+        elseif cardSlots[i][INDEX] == lastCard then
+            matches = matches + 1
+        end
+    end
+    if matches == slots - 1 then
+        for i = slots, 1, -1 do
+            cardSlots[i][INDEX] = 1
+            cardSlots[i][PNG] = cardPNG[1]
+            cardSlots[i][DESC] = cards[1][DESC]
+            cardSlots[i][TYPE] = cards[1][TYPE]
+        end
+    end
 end

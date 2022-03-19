@@ -6,6 +6,11 @@ function ABS(num)
     return num
 end
 
+function wait(seconds)
+    local start = os.time()
+    repeat until os.time() > start + seconds
+end
+
 function table.deepcopy(orig)
     local orig_type = type(orig)
     local copy

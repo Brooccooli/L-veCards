@@ -8,8 +8,9 @@ dofile("UI.lua")
 dofile("LoadParticles.lua")
 dofile("Help/UpdateHandler.lua")
 dofile("Help/DrawHandler.lua")
-dofile("Help/CoopHandler.lua")
+dofile("Help/VSHandler.lua")
 dofile("Help/Debug.lua")
+dofile("LoadingStages.lua")
 
 
 -- Constants
@@ -23,10 +24,13 @@ SCREEN_HEIGHT = 700
 
 
 function love.load()
+    LoadStages()
 
     LoadCards()
 
     LoadParticles()
+
+    pInit()
 
     -- Window size
     love.window.setMode(SCREEN_WIDTH, SCREEN_HEIGHT)
@@ -51,14 +55,12 @@ function love.update(dt)
 
     pSystem:update(dt)
 
-    CoopUpdate(dt)
+    VSUpdate(dt)
 end
 
 function love.draw()
-    -- Fill screen
-    love.graphics.setBackgroundColor(0.5, 0, 1)
 
-    CoopDraw()
+    VSDraw()
 
     -- Particle system
     pSystem:setPosition(love.mouse.getX(), love.mouse.getY())

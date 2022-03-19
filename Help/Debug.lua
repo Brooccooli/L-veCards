@@ -23,5 +23,11 @@ function Debug()
     offset = offset + TEXTH
     love.graphics.print("distance X:"..DebugDistX.." distnace Y:"..DebugDistY, TEXTW, offset)
 
+    -- Current scene
+    offset = offset + TEXTH
+    love.graphics.print("Current Scene: "..scene, TEXTW, offset)
+    offset = offset + TEXTH
+    love.graphics.print("God mathces: "..matches, TEXTW, offset)
+
     love.graphics.setColor(1,1,1)
 end

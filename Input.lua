@@ -27,20 +27,27 @@ function MInside(tempX, tempY)
     return false
 end
 
+-- Event activates on mouseclick
 function love.mousepressed(x, y, button, istouch, presses)
+    -- Left button
     if button == 1 then
         -- click effects
         pSystem:emit(32)
 
+        -- Checks all card slots
         for i = slots, 1, -1 do
-            if not cardSlots[i][FACE_UP] then
-                if MInside(cardSlots[i][X], cardSlots[i][Y]) then
+            -- If card is facing down flip up
+            if MInside(cardSlots[i][X], cardSlots[i][Y]) then
+                if not cardSlots[i][FACE_UP] then
                     cardSlots[i][ACTIVE] = true
+                else
+                    setCard(cardSlots[INDEX])
                 end
             end
         end
     end
-    if MInside(deck[X], deck[Y]) then
+    if MInside(deck[X], deck[Y]) and rerolls > 0 then
+        rerolls = rerolls - 1
         DeckPress()
     end
 end
