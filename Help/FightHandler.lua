@@ -11,13 +11,14 @@ function pVSp(p1CardIndex, p2CardIndex)
     end
 
     -- Card stats
-    local p1Stat = cards[p1CardIndex][STAT]
-    local p2Stat = cards[p2CardIndex][STAT]
+    p1Stat = cards[p1CardIndex][STAT]
+    p2Stat = cards[p2CardIndex][STAT]
 
     -- Check for area bonus
     if cards[p1CardIndex][TYPE] == stageType then
         p1Stat = p1Stat + BonusStat
-    elseif cards[p2CardIndex][TYPE] == stageType then
+    end
+    if cards[p2CardIndex][TYPE] == stageType then
         p2Stat = p2Stat + BonusStat
     end
 
