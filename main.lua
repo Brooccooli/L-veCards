@@ -7,10 +7,11 @@ dofile("DrawCards.lua")
 dofile("UI.lua")
 dofile("LoadParticles.lua")
 dofile("Help/UpdateHandler.lua")
-dofile("Help/DrawHandler.lua")
 dofile("Help/VSHandler.lua")
-dofile("Help/Debug.lua")
+dofile("Help/DrawHandler.lua")
 dofile("LoadingStages.lua")
+dofile("Help/FightHandler.lua")
+dofile("Help/Debug.lua")
 
 
 -- Constants

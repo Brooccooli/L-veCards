@@ -41,7 +41,7 @@ function love.mousepressed(x, y, button, istouch, presses)
                 if not cardSlots[i][FACE_UP] then
                     cardSlots[i][ACTIVE] = true
                 else
-                    setCard(cardSlots[INDEX])
+                    setCard(cardSlots[i][INDEX])
                 end
             end
         end

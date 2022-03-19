@@ -31,7 +31,7 @@ function LoadCards()
     deck[Y] = 500
 
     -- Card Template
-    card = {}
+    card = {}      
     card[PNG] = cardBack
     card[ACTIVE] = false
     card[HALFWAY] = false

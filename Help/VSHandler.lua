@@ -4,8 +4,8 @@ scenes = {Start = "Start", Player1 = "Player 1", Player2 = "Player 2", ArenaPick
 scene = scenes.Player1
 
 -- Players picked Card
-p1Card = {}
-p2Card = {}
+p1Card = 1
+p2Card = 1
 
 rerolls = 0
 
@@ -17,11 +17,11 @@ end
 function setCard(index)
     if scene == scenes.Player1 then
         pInit()
-        p1Card = table.deepcopy(cards[INDEX])
+        p1Card = index
         scene = scenes.Player2
     elseif scene == scenes.Player2 then
         pInit()
-        p2Card = table.deepcopy(cards[INDEX])
+        p2Card = index
         ArenaFrames = 3
         scene = scenes.ArenaPick
     end

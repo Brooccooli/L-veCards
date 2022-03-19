@@ -1,4 +1,5 @@
-ArenaFrames = 0
+ArenaTimer = -1
+FightTimer = -1
 
 function UpdateStart(dt)
 
@@ -22,22 +23,50 @@ function UpdatePlayer2(dt)
     end
 end
 
+-- Again, very stupid place to put variables, even if they aren't global
+local hasPickedStage = false
 function UpdateArenaPick(dt)
-    if ArenaFrames == 3 then
+    if ArenaTimer == -1 then
         currentStage = stage.Load
+        ArenaTimer = 5
     else
-        wait(2)
-        if ArenaFrames == 2 then
+        if ArenaTimer < 3 and not hasPickedStage then
             setStage()
+            hasPickedStage = true
         end
     end
 
-    if ArenaFrames < 1 then
+    if ArenaTimer < 0 then
         scene = scenes.Fight
+        hasPickedStage = false
+        ArenaTimer = -1
+    else
+        ArenaTimer = ArenaTimer - (1 * dt)
     end
-    ArenaFrames = ArenaFrames - 1
+
 end
 
+-- Really fucking stupid place to put global variables
+HaveFought = false
+FightWinner = 0
 function UpdateFight(dt)
-    
+
+    if FightTimer == -1 then
+        FightTimer = 10
+    end
+
+    if FightTimer < 5 and not HaveFought then
+        FightWinner = pVSp(p1Card, p2Card)
+        HaveFought = true
+    end
+
+    if FightTimer < 0 then
+        rerolls = 1
+        FightTimer = -1
+        HaveFought = false
+        scene = scenes.Player1
+    else
+        FightTimer = FightTimer - (1 * dt)
+    end
+
 end
