@@ -48,8 +48,10 @@ function pVSp(p1CardIndex, p2CardIndex)
 
     -- 1 = p1, -1 = p2, 0 = tie
     if result > 0 then
+        p1Areas[stageType] = p1Areas[stageType] + 1
         return 1
     elseif result < 0 then
+        p2Areas[stageType] = p2Areas[stageType] + 1
         return -1
     else
         return 0

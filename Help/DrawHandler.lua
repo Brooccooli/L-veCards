@@ -2,25 +2,15 @@ function DrawStart()
 
 end
 
-function DrawPlayer1()
+--ProfilePic positions
+pic1 = {}; pic1.x = 12; pic1.y = 12
+pic2 = {}; pic2.x = PRO_PIC_WIDTH + 50; pic2.y = 12
+function DrawCardPic()
     -- Fill screen
     love.graphics.setBackgroundColor(0.5, 0, 1)
     DrawCards()
 
-    -- Card Deck
-    for i = 10, 1, -1 do
-        if MInside(deck[X], deck[Y]) then
-            love.graphics.draw(cardBack, deck[X] - i, deck[Y] - i, MAX_SIZE - (0.05 * i), MAX_SIZE, MAX_SIZE)
-        else
-            love.graphics.draw(cardBack, deck[X] - i, deck[Y] - i, MAX_SIZE, MAX_SIZE, MAX_SIZE)
-        end
-    end
-end
-
-function DrawPlayer2()
-    -- Fill screen
-    love.graphics.setBackgroundColor(0.5, 0, 1)
-    DrawCards()
+    DrawProfilePics()
 
     -- Card Deck
     for i = 10, 1, -1 do
@@ -67,4 +57,16 @@ function DrawFight()
         love.graphics.draw(cardPNG[p1Card], midX - (CARD_PIXEL_X / 2), posY, 0, MAX_SIZE, MAX_SIZE)
         love.graphics.draw(cardPNG[p2Card], midX + (CARD_PIXEL_X / 2), posY, 0, MAX_SIZE, MAX_SIZE)
     end
+end
+
+function DrawProfilePics()
+    -- Draw Profile Pics
+    love.graphics.draw(ProfilePic, pic1.x, pic1.y, 0, 1, 1)
+    love.graphics.setColor(0,0,0)
+    love.graphics.print("Player 1", pic1.x + 10, pic1.y + ((PRO_PIC_HEIGHT / 5) * 4), 0.1, 2, 1)
+    love.graphics.setColor(1,1,1)
+    love.graphics.draw(ProfilePic, pic2.x, pic2.y, 0, 1, 1)
+    love.graphics.setColor(0,0,0)
+    love.graphics.print("Player 2", pic2.x + 10, pic2.y + ((PRO_PIC_HEIGHT / 5) * 4) + 5, -0.1, 2, 1)
+    love.graphics.setColor(1,1,1)
 end

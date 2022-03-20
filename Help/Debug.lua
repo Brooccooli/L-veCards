@@ -37,5 +37,11 @@ function Debug()
         love.graphics.print("Have fought: false", TEXTW, offset)
     end
 
+    -- Controlled areas
+    offset = offset + TEXTH
+    love.graphics.print("P1 mutant:"..p1Areas[MUTANT].." P1 dimension:"..p1Areas[DIMENSION].." P1 Monke:"..p1Areas[MONKE], TEXTW, offset)
+    offset = offset + TEXTH
+    love.graphics.print("P2 mutant:"..p2Areas[MUTANT].." P2 dimension:"..p2Areas[DIMENSION].." P2 Monke:"..p2Areas[MONKE], TEXTW, offset)
+
     love.graphics.setColor(1,1,1)
 end

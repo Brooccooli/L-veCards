@@ -7,6 +7,13 @@ scene = scenes.Player1
 p1Card = 1
 p2Card = 1
 
+-- Players controlled Areas
+p1Areas = {}
+p1Areas["mutant"] = 0
+p1Areas["monke"] = 0
+p1Areas["dimension"] = 0;
+p2Areas = { ["mutant"] = 0, ["monke"] = 0, ["dimension"] = 0}
+
 rerolls = 0
 
 function pInit()
@@ -22,7 +29,7 @@ function setCard(index)
     elseif scene == scenes.Player2 then
         pInit()
         p2Card = index
-        ArenaFrames = 3
+        ArenaTimer = 3
         scene = scenes.ArenaPick
     end
 end
@@ -37,8 +44,8 @@ end
 
 function VSDraw()
     if scene == scenes.Start then DrawStart()
-    elseif scene == scenes.Player1 then DrawPlayer1()
-    elseif scene == scenes.Player2 then DrawPlayer2()
+    elseif scene == scenes.Player1 then DrawCardPic()
+    elseif scene == scenes.Player2 then DrawCardPic()
     elseif scene == scenes.ArenaPick then DrawArenaPick()
     elseif scene == scenes.Fight then DrawFight() end
 end

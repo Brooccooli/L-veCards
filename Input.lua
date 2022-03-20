@@ -32,7 +32,7 @@ function love.mousepressed(x, y, button, istouch, presses)
     -- Left button
     if button == 1 then
         -- click effects
-        pSystem:emit(32)
+        ClickPSystem:emit(32)
 
         -- Checks all card slots
         for i = slots, 1, -1 do

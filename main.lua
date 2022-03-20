@@ -1,18 +1,18 @@
-dofile("Input.lua")
-dofile("CardFunctions.lua")
-dofile("Help/MAF.lua")
-dofile("LoadCards.lua")
-dofile("PrintEffects.lua")
-dofile("DrawCards.lua")
-dofile("UI.lua")
-dofile("LoadParticles.lua")
-dofile("Help/UpdateHandler.lua")
-dofile("Help/VSHandler.lua")
-dofile("Help/DrawHandler.lua")
-dofile("LoadingStages.lua")
-dofile("Help/FightHandler.lua")
-dofile("Help/Debug.lua")
-
+require('Load/UILoader')
+require("Input")
+require("CardFunctions")
+require("Help/MAF")
+require("Load/LoadCards")
+require("PrintEffects")
+require("DrawCards")
+require("UI")
+require("Load/LoadParticles")
+require("Help/UpdateHandler")
+require("Help/VSHandler")
+require("Help/DrawHandler")
+require("Load/LoadingStages")
+require("Help/FightHandler")
+require("Help/Debug")
 
 -- Constants
 MAX_SIZE = 0.2
@@ -26,7 +26,7 @@ SCREEN_HEIGHT = 700
 
 function love.load()
     LoadStages()
-
+    UiLoad()
     LoadCards()
 
     LoadParticles()
@@ -54,7 +54,7 @@ function love.update(dt)
 
     SetMouse()
 
-    pSystem:update(dt)
+    ClickPSystem:update(dt)
 
     VSUpdate(dt)
 end
@@ -64,9 +64,9 @@ function love.draw()
     VSDraw()
 
     -- Particle system
-    pSystem:setPosition(love.mouse.getX(), love.mouse.getY())
-    px, py = pSystem:getPosition()
-    love.graphics.draw(pSystem, pX, pY)
+    ClickPSystem:setPosition(love.mouse.getX(), love.mouse.getY())
+    px, py = ClickPSystem:getPosition()
+    love.graphics.draw(ClickPSystem, pX, pY)
     
     Debug()
 end
