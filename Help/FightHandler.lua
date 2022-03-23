@@ -1,3 +1,6 @@
+p1EndStat = 0
+p2EndStat = 0
+
 function pVSp(p1CardIndex, p2CardIndex)
     -- Bonus stat
     local BonusStat = 3
@@ -43,8 +46,17 @@ function pVSp(p1CardIndex, p2CardIndex)
         p2Stat = p2Stat + BonusStat
     end
 
+    -- Debugging stuff
+    p1EndStat = p1Stat
+    p2EndStat = p2Stat
+
     -- Check highest stat
     local result = p1Stat - p2Stat
+
+    -- Creep god matchup
+    if GodCheck(p1CardIndex, p2CardIndex) ~= 0 then
+        result = GodCheck(p1CardIndex, p2CardIndex)
+    end
 
     -- 1 = p1, -1 = p2, 0 = tie
     if result > 0 then
@@ -56,4 +68,14 @@ function pVSp(p1CardIndex, p2CardIndex)
     else
         return 0
     end
+end
+
+function GodCheck(p1CardIndex, p2CardIndex)
+    if p1CardIndex == 1 and p2CardIndex == 3 then
+        return 1
+    elseif p1CardIndex == 3 and p2CardIndex == 1 then
+        return -1
+    end
+
+    return 0
 end

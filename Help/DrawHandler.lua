@@ -4,13 +4,14 @@ end
 
 --ProfilePic positions
 pic1 = {}; pic1.x = 12; pic1.y = 12
-pic2 = {}; pic2.x = PRO_PIC_WIDTH + 50; pic2.y = 12
+pic2 = {}; pic2.x = SCREEN_WIDTH - PRO_PIC_WIDTH - 12; pic2.y = 12
 function DrawCardPic()
     -- Fill screen
     love.graphics.setBackgroundColor(0.5, 0, 1)
     DrawCards()
 
     DrawProfilePics()
+    drawControlledArenas()
 
     -- Card Deck
     for i = 10, 1, -1 do
@@ -44,29 +45,72 @@ function DrawFight()
     -- Might this be good code at 4:23 am?
     if not HaveFought then
         -- prints both cards at each side of the screen
+        love.graphics.setColor(0,0,0)
+        love.graphics.draw(cardPNG[p1Card], posX1 - 4, posY - 4, 0, MAX_SIZE + 0.01, MAX_SIZE + 0.01)
+        love.graphics.setColor(1,1,1)
         love.graphics.draw(cardPNG[p1Card], posX1, posY, 0, MAX_SIZE, MAX_SIZE)
+
+        love.graphics.setColor(0,0,0)
+        love.graphics.draw(cardPNG[p2Card], posX2 - 4, posY - 4, 0, MAX_SIZE + 0.01, MAX_SIZE + 0.01)
+        love.graphics.setColor(1,1,1)
         love.graphics.draw(cardPNG[p2Card], posX2, posY, 0, MAX_SIZE, MAX_SIZE)
     elseif FightWinner == 1 then
         -- player 1 winner
+        love.graphics.setColor(0,0,0)
+        love.graphics.draw(cardPNG[p1Card], midX - 4, posY - 4, 0, MAX_SIZE + 0.01, MAX_SIZE + 0.01)
+        love.graphics.setColor(1,1,1)
         love.graphics.draw(cardPNG[p1Card], midX, posY, 0, MAX_SIZE, MAX_SIZE)
-    elseif FightWinner == 2 then
+    elseif FightWinner == -1 then
         -- player 2 winner
-        love.graphics.draw(cardPNG[p1Card], midX, posY, 0, MAX_SIZE, MAX_SIZE)
+        love.graphics.setColor(0,0,0)
+        love.graphics.draw(cardPNG[p2Card], midX - 4, posY - 4, 0, MAX_SIZE + 0.01, MAX_SIZE + 0.01)
+        love.graphics.setColor(1,1,1)
+        love.graphics.draw(cardPNG[p2Card], midX, posY, 0, MAX_SIZE, MAX_SIZE)
     else
         -- TIE
+        love.graphics.setColor(0,0,0)
+        love.graphics.draw(cardPNG[p1Card], midX - 4- (CARD_PIXEL_X / 2), posY - 4, 0, MAX_SIZE + 0.01, MAX_SIZE + 0.01)
+        love.graphics.setColor(1,1,1)
         love.graphics.draw(cardPNG[p1Card], midX - (CARD_PIXEL_X / 2), posY, 0, MAX_SIZE, MAX_SIZE)
+
+        
+        love.graphics.setColor(0,0,0)
+        love.graphics.draw(cardPNG[p2Card], midX - 4 + (CARD_PIXEL_X / 2), posY - 4, 0, MAX_SIZE + 0.01, MAX_SIZE + 0.01)
+        love.graphics.setColor(1,1,1)
         love.graphics.draw(cardPNG[p2Card], midX + (CARD_PIXEL_X / 2), posY, 0, MAX_SIZE, MAX_SIZE)
     end
 end
+
+function DrawWinscreen(whichP)
+    love.graphics.print("PLAYER "..WinPlayer.." WON!", (SCREEN_WIDTH / 2) - CARD_PIXEL_X, (SCREEN_HEIGHT / 2) - (CARD_PIXEL_Y * 1.5), 0, 4, 4)  
+    love.graphics.draw(Winner[whichP], (SCREEN_WIDTH / 2) - (CARD_PIXEL_X / 2), (SCREEN_HEIGHT / 2) - (CARD_PIXEL_Y / 2), 0, MAX_SIZE, MAX_SIZE)     
+end 
 
 function DrawProfilePics()
     -- Draw Profile Pics
     love.graphics.draw(ProfilePic, pic1.x, pic1.y, 0, 1, 1)
     love.graphics.setColor(0,0,0)
-    love.graphics.print("Player 1", pic1.x + 10, pic1.y + ((PRO_PIC_HEIGHT / 5) * 4), 0.1, 2, 1)
+    love.graphics.print("Player 1", pic1.x + 20, pic1.y + ((PRO_PIC_HEIGHT / 5) * 4), 0.1, 2, 1)
     love.graphics.setColor(1,1,1)
+
     love.graphics.draw(ProfilePic, pic2.x, pic2.y, 0, 1, 1)
     love.graphics.setColor(0,0,0)
-    love.graphics.print("Player 2", pic2.x + 10, pic2.y + ((PRO_PIC_HEIGHT / 5) * 4) + 5, -0.1, 2, 1)
+    love.graphics.print("Player 2", pic2.x + 20, pic2.y + ((PRO_PIC_HEIGHT / 5) * 4) + 5, -0.1, 2, 1)
     love.graphics.setColor(1,1,1)
+end
+
+function drawControlledArenas()
+    -- Player one
+    love.graphics.setColor(0,0,0)
+    love.graphics.print("Contorolled Areas", pic1.x - 4, pic1.y + PRO_PIC_HEIGHT + 10, 0, 1.5, 1)
+    shadow("Citys: "..p1Areas[MONKE], pic1.x, pic1.y + PRO_PIC_HEIGHT + 20)
+    changingColor("Desert: "..p1Areas[MUTANT], pic1.x + 8, pic1.y + PRO_PIC_HEIGHT + 33)
+    floatyLetters("???: "..p1Areas[DIMENSION], pic1.x + 1, pic1.y + PRO_PIC_HEIGHT + 46)
+
+    -- Player 2
+    love.graphics.print("Contorolled Areas", pic2.x - 4, pic2.y + PRO_PIC_HEIGHT + 10, 0, 1.5, 1)
+    shadow("Citys: "..p2Areas[MONKE], pic2.x, pic2.y + PRO_PIC_HEIGHT + 20)
+    changingColor("Desert: "..p2Areas[MUTANT], pic2.x + 8, pic2.y + PRO_PIC_HEIGHT + 33)
+    floatyLetters("???: "..p2Areas[DIMENSION], pic2.x + 1, pic2.y + PRO_PIC_HEIGHT + 46)
+    love.graphics.setColor(1, 1, 1)
 end

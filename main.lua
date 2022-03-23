@@ -1,3 +1,12 @@
+-- Constants
+MAX_SIZE = 0.2
+CARD_PIXEL_X = 784 * MAX_SIZE
+CARD_PIXEL_Y = 900 * MAX_SIZE
+-- Lowest width = 1000
+-- Lowest height = 700
+SCREEN_WIDTH = 1200
+SCREEN_HEIGHT = 670
+
 require('Load/UILoader')
 require("Input")
 require("CardFunctions")
@@ -13,15 +22,6 @@ require("Help/DrawHandler")
 require("Load/LoadingStages")
 require("Help/FightHandler")
 require("Help/Debug")
-
--- Constants
-MAX_SIZE = 0.2
-CARD_PIXEL_X = 784 * MAX_SIZE
-CARD_PIXEL_Y = 900 * MAX_SIZE
--- Lowest width = 1000
--- Lowest height = 700
-SCREEN_WIDTH = 1200
-SCREEN_HEIGHT = 700
 
 
 function love.load()

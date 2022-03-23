@@ -28,8 +28,12 @@ function Debug()
     love.graphics.print("Current Scene: "..scene, TEXTW, offset)
     offset = offset + TEXTH
     love.graphics.print("God mathces: "..matches, TEXTW, offset)
+
     offset = offset + TEXTH
-    love.graphics.print("P1 Card Index: "..p1Card, TEXTW, offset)
+    love.graphics.print("P1 Card Stat: "..p1EndStat, TEXTW, offset)
+    offset = offset + TEXTH
+    love.graphics.print("P2 Card Stat: "..p2EndStat, TEXTW, offset)
+
     offset = offset + TEXTH
     if HaveFought then
         love.graphics.print("Have fought: true", TEXTW, offset)

@@ -34,8 +34,8 @@ function shadow(str, textX, textY)
         strLength = strLength + 1
     end
     
-    love.graphics.setColor(1,0,0)
-    love.graphics.print(str, textX + - ((strLength / 2)), textY)
+    love.graphics.setColor(0,1,0)
+    love.graphics.print(str, textX + - ((strLength / 2)), textY, 0 ,1,1.2)
     love.graphics.setColor(0,0,0)
     love.graphics.print(str, textX + - ((strLength / 2)) + 0.5, textY + 0.5)
 end

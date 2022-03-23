@@ -1,5 +1,5 @@
 -- State machine
-scenes = {Start = "Start", Player1 = "Player 1", Player2 = "Player 2", ArenaPick = "Arena pick", Fight = "Fight"}
+scenes = {Start = "Start", Player1 = "Player 1", Player2 = "Player 2", ArenaPick = "Arena pick", Fight = "Fight", WinScreen = "WinScreen"}
 
 scene = scenes.Player1
 
@@ -8,13 +8,12 @@ p1Card = 1
 p2Card = 1
 
 -- Players controlled Areas
-p1Areas = {}
-p1Areas["mutant"] = 0
-p1Areas["monke"] = 0
-p1Areas["dimension"] = 0;
+p1Areas = { ["mutant"] = 0; ["monke"] = 0; ["dimension"] = 0}
 p2Areas = { ["mutant"] = 0, ["monke"] = 0, ["dimension"] = 0}
 
 rerolls = 0
+
+WinPlayer = 1
 
 function pInit()
     DeckPress()
@@ -47,5 +46,6 @@ function VSDraw()
     elseif scene == scenes.Player1 then DrawCardPic()
     elseif scene == scenes.Player2 then DrawCardPic()
     elseif scene == scenes.ArenaPick then DrawArenaPick()
-    elseif scene == scenes.Fight then DrawFight() end
+    elseif scene == scenes.Fight then DrawFight() 
+    elseif scene == scenes.WinScreen then DrawWinscreen(WinPlayer) end
 end

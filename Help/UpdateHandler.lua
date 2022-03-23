@@ -6,6 +6,7 @@ function UpdateStart(dt)
 end
 
 function UpdatePlayer1(dt)
+    CheckForWin()
     for i = slots, 1, -1 do
         cardSlots[i][WIDTH] = turnCard(cardSlots[i][WIDTH], i)
 
@@ -26,14 +27,12 @@ end
 -- Again, very stupid place to put variables, even if they aren't global
 local hasPickedStage = false
 function UpdateArenaPick(dt)
-    if ArenaTimer == -1 then
+    if ArenaTimer == -1 then -- not working atm
         currentStage = stage.Load
-        ArenaTimer = 5
-    else
-        if ArenaTimer < 3 and not hasPickedStage then
-            setStage()
-            hasPickedStage = true
-        end
+        ArenaTimer = 6
+    elseif ArenaTimer < 2 and not hasPickedStage then
+        setStage()
+        hasPickedStage = true
     end
 
     if ArenaTimer < 0 then
@@ -41,7 +40,7 @@ function UpdateArenaPick(dt)
         hasPickedStage = false
         ArenaTimer = -1
     else
-        ArenaTimer = ArenaTimer - (1 * dt)
+        ArenaTimer = ArenaTimer - dt
     end
 
 end
@@ -69,4 +68,15 @@ function UpdateFight(dt)
         FightTimer = FightTimer - (1 * dt)
     end
 
+end
+
+function CheckForWin()
+    -- Player 1
+    if p1Areas.dimension > 2 or p1Areas.mutant > 2 or p1Areas.monke > 2 then
+        WinPlayer = 1
+        scene = scenes.WinScreen
+    elseif p2Areas.dimension > 2 or p2Areas.mutant > 2 or p2Areas.monke > 2 then
+        WinPlayer = 2
+        scene = scenes.WinScreen
+    end
 end

@@ -61,7 +61,7 @@ function LoadCards()
     for i = slots, 1, -1 do
         cardSlots[i] = table.deepcopy(card)
         cardSlots[i][X] = cardPadding * (i - 1) + 100 + ((SCREEN_WIDTH - 1000) / 2)
-        cardSlots[i][Y] = 500
+        cardSlots[i][Y] = SCREEN_HEIGHT - (CARD_PIXEL_Y + 50)
         cardSlots[i][PNG] = cardBack
     end
 
@@ -158,20 +158,20 @@ function SetDescriptions()
     
     -- Card type stat
     cards[1][STAT] = 100
-    cards[2][STAT] = 3
-    cards[3][STAT] = 3
+    cards[2][STAT] = 4
+    cards[3][STAT] = 2
     cards[4][STAT] = 3
-    cards[5][STAT] = 3
-    cards[6][STAT] = 3
-    cards[7][STAT] = 3
-    cards[8][STAT] = 3
-    cards[9][STAT] = 3
-    cards[10][STAT] = 3
-    cards[11][STAT] = 3
-    cards[12][STAT] = 3
-    cards[13][STAT] = 3
-    cards[14][STAT] = 3
-    cards[15][STAT] = 3
+    cards[5][STAT] = 2
+    cards[6][STAT] = 4
+    cards[7][STAT] = 2
+    cards[8][STAT] = 2
+    cards[9][STAT] = 5
+    cards[10][STAT] = 1
+    cards[11][STAT] = 5
+    cards[12][STAT] = 6
+    cards[13][STAT] = 6
+    cards[14][STAT] = 1
+    cards[15][STAT] = 2
     cards[16][STAT] = 3
 end
 
