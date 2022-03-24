@@ -55,6 +55,10 @@ function love.update(dt)
     -- good standard
     if dt > 1 then dt = 1 end
 
+    if love.keyboard.isDown("escape") then
+        love.event.quit()
+    end
+
     SetMouse()
 
     ClickPSystem:update(dt)

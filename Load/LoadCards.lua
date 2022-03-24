@@ -89,6 +89,7 @@ function reRoll()
         --cardSlots[i][PNG] = cardBack
         cardSlots[i][DESC] = cards[index][DESC]
         cardSlots[i][TYPE] = cards[index][TYPE]
+        cardSlots[i][EFFECTS].Run = cards[index][EFFECTS].Run
     end
     SummonGod()
 end
@@ -186,7 +187,7 @@ end
 function SetEffects()
     -- Boosts
     cards[4][EFFECTS] = { Run = FightEffects.DimBoost }
-    cards[10][EFFECTS] = { Run = FightEffects.MonBoost }
+    cards[10][EFFECTS] = { Run = FightEffects.MutBoost }
     cards[15][EFFECTS] = { Run = FightEffects.MonBoost }
 
     -- Switch attacks

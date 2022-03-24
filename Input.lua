@@ -32,7 +32,7 @@ function love.mousepressed(x, y, button, istouch, presses)
     -- Left button
     if button == 1 then
         -- click effects
-        ClickPSystem:emit(32)
+        ClickPSystem:emit(10 )
 
         -- Start
         if scene == scenes.Start then

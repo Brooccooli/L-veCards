@@ -31,9 +31,9 @@ end
 -- Again, very stupid place to put variables, even if they aren't global
 local hasPickedStage = false
 function UpdateArenaPick(dt)
-    if ArenaTimer == -1 then -- not working atm
+    if ArenaTimer == -1 then -- working atm
         currentStage = stage.Load
-        ArenaTimer = 6
+        ArenaTimer = 5
     elseif ArenaTimer < 2 and not hasPickedStage then
         setStage()
         hasPickedStage = true
@@ -46,7 +46,6 @@ function UpdateArenaPick(dt)
     else
         ArenaTimer = ArenaTimer - dt
     end
-
 end
 
 -- Really fucking stupid place to put global variables

@@ -23,7 +23,7 @@ function DrawCardPic()
 
     -- Card Deck
     for i = 10, 1, -1 do
-        if MInside(deck[X], deck[Y]) then
+        if MInside(deck[X], deck[Y]) and rerolls > 0 then
             love.graphics.draw(cardBack, deck[X] - i, deck[Y] - i, MAX_SIZE - (0.05 * i), MAX_SIZE, MAX_SIZE)
         else
             love.graphics.draw(cardBack, deck[X] - i, deck[Y] - i, MAX_SIZE, MAX_SIZE, MAX_SIZE)
@@ -65,6 +65,7 @@ function DrawFight()
     elseif FightWinner == 1 then
         -- player 1 winner
         love.graphics.setColor(0,0,0)
+        -- Add text with the winning stat
         love.graphics.draw(cardPNG[p1Card], midX - 4, posY - 4, 0, MAX_SIZE + 0.01, MAX_SIZE + 0.01)
         love.graphics.setColor(1,1,1)
         love.graphics.draw(cardPNG[p1Card], midX, posY, 0, MAX_SIZE, MAX_SIZE)
@@ -102,6 +103,7 @@ function DrawProfilePics()
         love.graphics.setColor(1,1,1)
     end
     love.graphics.draw(ProfilePic, pic1.x, pic1.y, 0, 1, 1)
+    DrawAbilities(pic1.x - 30, pic1.y, 1)
     love.graphics.setColor(0,0,0)
     love.graphics.print("Player 1", pic1.x + 20, pic1.y + ((PRO_PIC_HEIGHT / 5) * 4), 0.1, 2, 1)
     love.graphics.setColor(1,1,1)
@@ -112,6 +114,7 @@ function DrawProfilePics()
         love.graphics.setColor(1,1,1)
     end
     love.graphics.draw(ProfilePic, pic2.x, pic2.y, 0, 1, 1)
+    DrawAbilities(pic2.x - 30, pic2.y, 2)
     love.graphics.setColor(0,0,0)
     love.graphics.print("Player 2", pic2.x + 20, pic2.y + ((PRO_PIC_HEIGHT / 5) * 4) + 5, -0.1, 2, 1)
     love.graphics.setColor(1,1,1)
@@ -131,4 +134,50 @@ function DrawControlledArenas()
     changingColor("Desert: "..p2Areas[MUTANT], pic2.x + 8, pic2.y + PRO_PIC_HEIGHT + 33)
     floatyLetters("???: "..p2Areas[DIMENSION], pic2.x + 1, pic2.y + PRO_PIC_HEIGHT + 46)
     love.graphics.setColor(1, 1, 1)
+end
+
+-- Yes I shouldn't have duplicates, ugly
+function DrawAbilities(x, y, player)
+    local offsetY = 30
+
+    if player == 1 then
+        for i = 1, AmountOfEffects, 1 do
+            local offsetX = 28
+
+            if p1Effects[i].Run == FightEffects.DimBoost then
+                love.graphics.draw(EffectParticles.DimBoost, x + PRO_PIC_WIDTH + offsetX, y + (i * offsetY))
+            elseif p1Effects[i].Run == FightEffects.MonBoost then
+                love.graphics.draw(EffectParticles.MonBoost, x + PRO_PIC_WIDTH + offsetX, y + (i * offsetY))
+
+            elseif p1Effects[i].Run == FightEffects.MutBoost then
+                love.graphics.draw(EffectParticles.MutBoost, x + PRO_PIC_WIDTH + offsetX, y + (i * offsetY))
+
+            elseif p1Effects[i].Run == FightEffects.Sad then
+                love.graphics.draw(EffectParticles.Dice, x + PRO_PIC_WIDTH + offsetX, y + (i * offsetY))
+
+            elseif p1Effects[i].Run == FightEffects.Why then
+                love.graphics.draw(EffectParticles.Why, x + PRO_PIC_WIDTH + offsetX, y + (i * offsetY))
+
+            end
+        end 
+    end  
+    if player == 2 then
+        for i = 1, AmountOfEffects, 1 do
+            if p2Effects[i].Run == FightEffects.DimBoost then
+                love.graphics.draw(EffectParticles.DimBoost, x, y + (i * offsetY))
+            elseif p2Effects[i].Run == FightEffects.MonBoost then
+                love.graphics.draw(EffectParticles.MonBoost, x, y + (i * offsetY))
+
+            elseif p2Effects[i].Run == FightEffects.MutBoost then
+                love.graphics.draw(EffectParticles.MutBoost, x, y + (i * offsetY))
+
+            elseif p2Effects[i].Run == FightEffects.Sad then
+                love.graphics.draw(EffectParticles.Dice, x, y + (i * offsetY))
+
+            elseif p2Effects[i].Run == FightEffects.Why then
+                love.graphics.draw(EffectParticles.Why, x, y + (i * offsetY))
+
+            end
+        end 
+    end    
 end

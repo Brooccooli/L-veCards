@@ -14,12 +14,12 @@ function pVSp(p1CardIndex, p2CardIndex)
     end
 
     -- Add card effects to array
-    if cards[p1CardIndex][EFFECTS] ~= FightEffects.None then
+    if cards[p1CardIndex][EFFECTS].Run(MONKE) ~= -1000 then
         p1Effects[p1EffecctIndex] = {Run = cards[p1CardIndex][EFFECTS].Run}
         p1EffecctIndex = p1EffecctIndex + 1
         if p1EffecctIndex > 3 then p1EffecctIndex = 1 end
     end
-    if cards[p2CardIndex][EFFECTS] ~= FightEffects.None then
+    if cards[p2CardIndex][EFFECTS].Run(MONKE) ~= -1000 then
         p2Effects[p2EffecctIndex] = {Run = cards[p2CardIndex][EFFECTS].Run}
         p2EffecctIndex = p2EffecctIndex + 1
         if p2EffecctIndex > 3 then p2EffecctIndex = 1 end
@@ -67,15 +67,19 @@ function pVSp(p1CardIndex, p2CardIndex)
         if effect1 == -500 or effect2 == -500 then
             willSwitchStats = true
         else
-            p1EndStat = p1EndStat + effect1
-            p2EndStat = p2EndStat + effect2
+            if effect1 ~= -1000 then
+                p1Stat = p1Stat + effect1
+            end
+            if effect2 ~= -1000 then
+                p2Stat = p2Stat + effect2
+            end
         end
     end
 
     -- Switch stats
     if willSwitchStats then
         local statTemp = p1Stat
-        p1Stat = p2EndStat
+        p1Stat = p2Stat
         p2Stat = statTemp
     end
 

@@ -2,7 +2,7 @@ FightEffects = {}
 BoostBonus = 2
 
 function FightEffects.None(type)
-    return 0
+    return -1000
 end
 
 function FightEffects.DimBoost(type)

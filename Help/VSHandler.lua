@@ -27,8 +27,8 @@ function PlayerInit()
 end
 
 function VSInit()
-    p1Effects = { [1] = { Run = FightEffects.DimBoost }, [2] = { Run = FightEffects.DimBoost }, [3] = { Run = FightEffects.DimBoost } }   
-    p2Effects = { [1] = { Run = FightEffects.DimBoost }, [2] = { Run = FightEffects.DimBoost }, [3] = { Run = FightEffects.DimBoost } }   
+    p1Effects = { [1] = { Run = FightEffects.None }, [2] = { Run = FightEffects.None }, [3] = { Run = FightEffects.None } }   
+    p2Effects = { [1] = { Run = FightEffects.None }, [2] = { Run = FightEffects.None }, [3] = { Run = FightEffects.None } }   
 end
 
 function setCard(index)
@@ -39,7 +39,6 @@ function setCard(index)
     elseif scene == scenes.Player2 then
         PlayerInit()
         p2Card = index
-        ArenaTimer = 3
         scene = scenes.ArenaPick
     end
 end

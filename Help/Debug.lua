@@ -50,9 +50,9 @@ function Debug()
     -- Effects
     offset = offset + TEXTH
     offset = offset + TEXTH
-    love.graphics.print("P1 first fight effect: "..p1Effects[1].Run(MUTANT), TEXTW, offset)
+    love.graphics.print("P1 first fight effect: "..p1Effects[1].Run(cards[p1Card][TYPE]), TEXTW, offset)
     offset = offset + TEXTH
-    love.graphics.print("P2 first fight effect: "..p2Effects[1].Run(MUTANT), TEXTW, offset)
+    love.graphics.print("P2 first fight effect: "..p2Effects[1].Run(cards[p2Card][TYPE]), TEXTW, offset)
 
     love.graphics.setColor(1,1,1)
 end
