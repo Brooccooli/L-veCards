@@ -1,7 +1,7 @@
 -- State machine
 scenes = {Start = "Start", Player1 = "Player 1", Player2 = "Player 2", ArenaPick = "Arena pick", Fight = "Fight", WinScreen = "WinScreen"}
 
-scene = scenes.Player1
+scene = scenes.Start
 
 -- Players picked Card
 p1Card = 1
@@ -11,22 +11,33 @@ p2Card = 1
 p1Areas = { ["mutant"] = 0; ["monke"] = 0; ["dimension"] = 0}
 p2Areas = { ["mutant"] = 0, ["monke"] = 0, ["dimension"] = 0}
 
+-- Players battle effects
+AmountOfEffects = 3
+p1Effects = {}
+p1EffecctIndex = 1
+p2EffecctIndex = 1
+
 rerolls = 0
 
 WinPlayer = 1
 
-function pInit()
+function PlayerInit()
     DeckPress()
     rerolls = 1
 end
 
+function VSInit()
+    p1Effects = { [1] = { Run = FightEffects.DimBoost }, [2] = { Run = FightEffects.DimBoost }, [3] = { Run = FightEffects.DimBoost } }   
+    p2Effects = { [1] = { Run = FightEffects.DimBoost }, [2] = { Run = FightEffects.DimBoost }, [3] = { Run = FightEffects.DimBoost } }   
+end
+
 function setCard(index)
     if scene == scenes.Player1 then
-        pInit()
+        PlayerInit()
         p1Card = index
         scene = scenes.Player2
     elseif scene == scenes.Player2 then
-        pInit()
+        PlayerInit()
         p2Card = index
         ArenaTimer = 3
         scene = scenes.ArenaPick

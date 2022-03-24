@@ -2,7 +2,11 @@ ArenaTimer = -1
 FightTimer = -1
 
 function UpdateStart(dt)
-
+    if MInside(StartCard.X, StartCard.Y) then
+        StartCard.Rot = StartCard.Rot + 0.1
+    else
+        StartCard.Rot = 0
+    end
 end
 
 function UpdatePlayer1(dt)

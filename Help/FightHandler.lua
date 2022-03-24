@@ -13,6 +13,18 @@ function pVSp(p1CardIndex, p2CardIndex)
         stageType = MUTANT
     end
 
+    -- Add card effects to array
+    if cards[p1CardIndex][EFFECTS] ~= FightEffects.None then
+        p1Effects[p1EffecctIndex] = {Run = cards[p1CardIndex][EFFECTS].Run}
+        p1EffecctIndex = p1EffecctIndex + 1
+        if p1EffecctIndex > 3 then p1EffecctIndex = 1 end
+    end
+    if cards[p2CardIndex][EFFECTS] ~= FightEffects.None then
+        p2Effects[p2EffecctIndex] = {Run = cards[p2CardIndex][EFFECTS].Run}
+        p2EffecctIndex = p2EffecctIndex + 1
+        if p2EffecctIndex > 3 then p2EffecctIndex = 1 end
+    end
+
     -- Card stats
     p1Stat = cards[p1CardIndex][STAT]
     p2Stat = cards[p2CardIndex][STAT]
@@ -46,6 +58,27 @@ function pVSp(p1CardIndex, p2CardIndex)
         p2Stat = p2Stat + BonusStat
     end
 
+    -- Apply Effects
+    local willSwitchStats = false
+    for i = AmountOfEffects, 1, -1 do
+        local effect1 = p1Effects[1].Run(cards[p1CardIndex][TYPE]) 
+        local effect2 = p2Effects[1].Run(cards[p2CardIndex][TYPE]) 
+
+        if effect1 == -500 or effect2 == -500 then
+            willSwitchStats = true
+        else
+            p1EndStat = p1EndStat + effect1
+            p2EndStat = p2EndStat + effect2
+        end
+    end
+
+    -- Switch stats
+    if willSwitchStats then
+        local statTemp = p1Stat
+        p1Stat = p2EndStat
+        p2Stat = statTemp
+    end
+
     -- Debugging stuff
     p1EndStat = p1Stat
     p2EndStat = p2Stat
@@ -58,6 +91,7 @@ function pVSp(p1CardIndex, p2CardIndex)
         result = GodCheck(p1CardIndex, p2CardIndex)
     end
 
+    -- Return who won
     -- 1 = p1, -1 = p2, 0 = tie
     if result > 0 then
         p1Areas[stageType] = p1Areas[stageType] + 1
@@ -70,6 +104,7 @@ function pVSp(p1CardIndex, p2CardIndex)
     end
 end
 
+-- Checks if one player has god card and the other player has creep
 function GodCheck(p1CardIndex, p2CardIndex)
     if p1CardIndex == 1 and p2CardIndex == 3 then
         return 1

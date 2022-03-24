@@ -47,5 +47,12 @@ function Debug()
     offset = offset + TEXTH
     love.graphics.print("P2 mutant:"..p2Areas[MUTANT].." P2 dimension:"..p2Areas[DIMENSION].." P2 Monke:"..p2Areas[MONKE], TEXTW, offset)
 
+    -- Effects
+    offset = offset + TEXTH
+    offset = offset + TEXTH
+    love.graphics.print("P1 first fight effect: "..p1Effects[1].Run(MUTANT), TEXTW, offset)
+    offset = offset + TEXTH
+    love.graphics.print("P2 first fight effect: "..p2Effects[1].Run(MUTANT), TEXTW, offset)
+
     love.graphics.setColor(1,1,1)
 end

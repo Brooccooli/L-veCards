@@ -15,6 +15,7 @@ function LoadCards()
     TYPE = "type"
     STAT = "stat"
     FACE_UP = "fUp"
+    EFFECTS = "effects"
 
     -- Card Types
     DIMENSION = "dimension"
@@ -44,6 +45,7 @@ function LoadCards()
     card[TYPE] = MUTANT
     card[STAT] = 3
     card[FACE_UP] = false
+    card[EFFECTS] = { Run = FightEffects.None }
 
     -- Table in Table
     cards = {}
@@ -53,6 +55,7 @@ function LoadCards()
     end
 
     SetDescriptions()
+    SetEffects()
 
     -- Set Cardslots
     cardPadding = CARD_PIXEL_X + 45
@@ -74,8 +77,6 @@ function LoadCards()
     end
 
     SummonGod()
-
-    -- TODO: 4 of the same card summons God card and play new effect
 end
 
 function reRoll()
@@ -98,9 +99,16 @@ end
 function LoadPNG()
     cardPNG = {}
 
-    -- Loading cards
+    -- Misc Cards
     cardReroll = love.graphics.newImage("Assets/Cards/Reroll.png")
     cardBack = love.graphics.newImage("Assets/Cards/Backside.png")
+    StartCard = {}
+    StartCard.PNG = love.graphics.newImage("Assets/Cards/Start.png") 
+    StartCard.Rot = 0
+    StartCard.X = 100
+    StartCard.Y = SCREEN_HEIGHT - (SCREEN_HEIGHT / 1.6)
+
+    -- Playing Cards
     cardPNG[1] = love.graphics.newImage("Assets/Cards/AllSeeing.png")
     cardPNG[2] = love.graphics.newImage("Assets/Cards/CaveEye.png")
     cardPNG[3] = love.graphics.newImage("Assets/Cards/Creep.png")
@@ -175,6 +183,21 @@ function SetDescriptions()
     cards[16][STAT] = 3
 end
 
+function SetEffects()
+    -- Boosts
+    cards[4][EFFECTS] = { Run = FightEffects.DimBoost }
+    cards[10][EFFECTS] = { Run = FightEffects.MonBoost }
+    cards[15][EFFECTS] = { Run = FightEffects.MonBoost }
+
+    -- Switch attacks
+    cards[8][EFFECTS] = { Run = FightEffects.Why }
+
+    -- Negate enemies attack
+    cards[7][EFFECTS] = { Run = FightEffects.Sad }
+
+end
+
+-- Summons god
 function SummonGod()
     matches = 0
     local lastCard = 0

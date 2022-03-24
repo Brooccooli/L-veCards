@@ -2,8 +2,8 @@
 MAX_SIZE = 0.2
 CARD_PIXEL_X = 784 * MAX_SIZE
 CARD_PIXEL_Y = 900 * MAX_SIZE
--- Lowest width = 1000
--- Lowest height = 700
+-- Lowest width = 1200
+-- Lowest height = 670
 SCREEN_WIDTH = 1200
 SCREEN_HEIGHT = 670
 
@@ -22,6 +22,7 @@ require("Help/DrawHandler")
 require("Load/LoadingStages")
 require("Help/FightHandler")
 require("Help/Debug")
+require("FightEffects")
 
 
 function love.load()
@@ -31,7 +32,9 @@ function love.load()
 
     LoadParticles()
 
-    pInit()
+    VSInit()
+
+    PlayerInit()
 
     -- Window size
     love.window.setMode(SCREEN_WIDTH, SCREEN_HEIGHT)

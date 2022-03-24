@@ -34,14 +34,24 @@ function love.mousepressed(x, y, button, istouch, presses)
         -- click effects
         ClickPSystem:emit(32)
 
-        -- Checks all card slots
-        for i = slots, 1, -1 do
-            -- If card is facing down flip up
-            if MInside(cardSlots[i][X], cardSlots[i][Y]) then
-                if not cardSlots[i][FACE_UP] then
-                    cardSlots[i][ACTIVE] = true
-                else
-                    setCard(cardSlots[i][INDEX])
+        -- Start
+        if scene == scenes.Start then
+            if MInside(StartCard.X, StartCard.Y) then
+                scene = scenes.Player1
+            end
+        end
+
+        -- Card pick
+        if scene == scenes.Player1 or scene == scenes.Player2 then
+            -- Checks all card slots
+            for i = slots, 1, -1 do
+                -- If card is facing down flip up
+                if MInside(cardSlots[i][X], cardSlots[i][Y]) then
+                    if not cardSlots[i][FACE_UP] then
+                        cardSlots[i][ACTIVE] = true
+                    else
+                        setCard(cardSlots[i][INDEX])
+                    end
                 end
             end
         end

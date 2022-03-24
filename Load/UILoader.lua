@@ -7,4 +7,7 @@ function UiLoad()
     Winner = {}
     Winner[1] = love.graphics.newImage("Assets/UI/P1Win.png")
     Winner[2] = love.graphics.newImage("Assets/UI/P2Win.png")
+
+    -- Star Screen
+    StartScreen = love.graphics.newImage("Assets/UI/StartBackground.png")
 end

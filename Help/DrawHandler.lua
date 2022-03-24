@@ -1,17 +1,25 @@
 function DrawStart()
+    love.graphics.draw(StartScreen, 0, 0)
 
+    -- Draw buttons
+    love.graphics.draw(StartCard.PNG, StartCard.X + (CARD_PIXEL_X / 2), StartCard.Y + (CARD_PIXEL_Y / 2), StartCard.Rot, MAX_SIZE, MAX_SIZE, CARD_PIXEL_X * 2.5, CARD_PIXEL_Y * 2.5)
+
+    -- Credits
+    love.graphics.setColor(0,0,0)
+    floatyLetters("Creator of Everything: Alvin Jangvik", SCREEN_WIDTH - 300, SCREEN_HEIGHT - 20)
+    love.graphics.setColor(1,1,1)
 end
 
 --ProfilePic positions
-pic1 = {}; pic1.x = 12; pic1.y = 12
-pic2 = {}; pic2.x = SCREEN_WIDTH - PRO_PIC_WIDTH - 12; pic2.y = 12
+local pic1 = {}; pic1.x = 12; pic1.y = 12
+local pic2 = {}; pic2.x = SCREEN_WIDTH - PRO_PIC_WIDTH - 12; pic2.y = 12
 function DrawCardPic()
     -- Fill screen
     love.graphics.setBackgroundColor(0.5, 0, 1)
     DrawCards()
 
     DrawProfilePics()
-    drawControlledArenas()
+    DrawControlledArenas()
 
     -- Card Deck
     for i = 10, 1, -1 do
@@ -88,18 +96,28 @@ end
 
 function DrawProfilePics()
     -- Draw Profile Pics
+    if scene == scenes.Player2 then
+        love.graphics.setColor(0.4,0,0)
+    else
+        love.graphics.setColor(1,1,1)
+    end
     love.graphics.draw(ProfilePic, pic1.x, pic1.y, 0, 1, 1)
     love.graphics.setColor(0,0,0)
     love.graphics.print("Player 1", pic1.x + 20, pic1.y + ((PRO_PIC_HEIGHT / 5) * 4), 0.1, 2, 1)
     love.graphics.setColor(1,1,1)
 
+    if scene == scenes.Player1 then
+        love.graphics.setColor(0.4,0,0)
+    else
+        love.graphics.setColor(1,1,1)
+    end
     love.graphics.draw(ProfilePic, pic2.x, pic2.y, 0, 1, 1)
     love.graphics.setColor(0,0,0)
     love.graphics.print("Player 2", pic2.x + 20, pic2.y + ((PRO_PIC_HEIGHT / 5) * 4) + 5, -0.1, 2, 1)
     love.graphics.setColor(1,1,1)
 end
 
-function drawControlledArenas()
+function DrawControlledArenas()
     -- Player one
     love.graphics.setColor(0,0,0)
     love.graphics.print("Contorolled Areas", pic1.x - 4, pic1.y + PRO_PIC_HEIGHT + 10, 0, 1.5, 1)
