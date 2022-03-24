@@ -21,6 +21,8 @@ rerolls = 0
 
 WinPlayer = 1
 
+PickFirst = 1
+
 function PlayerInit()
     DeckPress()
     rerolls = 1
@@ -31,15 +33,40 @@ function VSInit()
     p2Effects = { [1] = { Run = FightEffects.None }, [2] = { Run = FightEffects.None }, [3] = { Run = FightEffects.None } }   
 end
 
+function StartPlayer()
+    if PickFirst == 1 then
+        scene = scenes.Player1
+    else
+        scene = scenes.Player2
+    end
+end
+
+function SetPlayer(CurrentPlayer)
+    if CurrentPlayer == PickFirst then
+        if CurrentPlayer == 1 then
+            scene = scenes.Player2
+        else
+            scene = scenes.Player1
+        end
+    else
+        scene = scenes.ArenaPick
+        if PickFirst == 1 then
+            PickFirst = 2
+        else
+            PickFirst = 1
+        end
+    end
+end
+
 function setCard(index)
     if scene == scenes.Player1 then
         PlayerInit()
         p1Card = index
-        scene = scenes.Player2
+        SetPlayer(1)
     elseif scene == scenes.Player2 then
         PlayerInit()
         p2Card = index
-        scene = scenes.ArenaPick
+        SetPlayer(2)
     end
 end
 

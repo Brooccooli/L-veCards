@@ -37,7 +37,7 @@ function love.mousepressed(x, y, button, istouch, presses)
         -- Start
         if scene == scenes.Start then
             if MInside(StartCard.X, StartCard.Y) then
-                scene = scenes.Player1
+                StartPlayer()
             end
         end
 

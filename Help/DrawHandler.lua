@@ -65,7 +65,6 @@ function DrawFight()
     elseif FightWinner == 1 then
         -- player 1 winner
         love.graphics.setColor(0,0,0)
-        -- Add text with the winning stat
         love.graphics.draw(cardPNG[p1Card], midX - 4, posY - 4, 0, MAX_SIZE + 0.01, MAX_SIZE + 0.01)
         love.graphics.setColor(1,1,1)
         love.graphics.draw(cardPNG[p1Card], midX, posY, 0, MAX_SIZE, MAX_SIZE)

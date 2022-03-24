@@ -66,7 +66,7 @@ function UpdateFight(dt)
         rerolls = 1
         FightTimer = -1
         HaveFought = false
-        scene = scenes.Player1
+        StartPlayer()
     else
         FightTimer = FightTimer - (1 * dt)
     end
